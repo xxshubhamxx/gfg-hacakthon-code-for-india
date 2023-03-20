@@ -55,14 +55,13 @@ def getres(data):
     return r
 
 @app.route('/res')
-def res():
-    
+def res():    
     data = request.args.to_dict()
     print(data)
-    w = int(data['Weight'])
-    h = int(data['Height'])
+    w = float(data['Weight'])
+    h = float(data['Height'])
     data['BMI'] = str(w / (h * h / 10000))
-    data['Calorie_Deficient_or_Over'] = str(int(data['calories']) - int(data['calories_burnt']) - 2000)
+    data['Calorie_Deficient_or_Over'] = str(float(data['calories']) - float(data['calories_burnt']) - 2000)
     return render_template('res.html', results=getres(data))
 
 if __name__ == '__main__':

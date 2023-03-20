@@ -20,15 +20,16 @@
         }
     </style>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </head>
 <body>
     <h1>Health Prediction</h1>
-    <form id="health-form" action= "{{ url_for('res') }}" >
+    <form id="health-form" action= "{{ url_for('res') }}" onsubmit="return validateForm()">
         <input type="number" name="step_count" placeholder="Step count" required>
         <input type="number" name="calories_burnt" placeholder="Calories burnt" required>
         <input type="number" name="hours_of_sleep" placeholder="Hours of sleep" required>
-        <input type="number" name="Weight" placeholder="Weight (in kg)" required>
-        <input type="number" name="Height" placeholder="Height (in cm)" required>
+        <input type="number" name="Weight" placeholder="Weight (in kg)" step="0.01" required>
+        <input type="number" name="Height" placeholder="Height (in cm)" step="0.01" required>
         <input type="number" name="calories" placeholder="Calories" required>
         <button class="custom-btn btn-1" type="submit"><span>Submit</span></button>
 
