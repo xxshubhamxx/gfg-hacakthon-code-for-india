@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Prediction</title>
     <style>
-        /* Your custom CSS styles */
         body {
             font-family: Arial, sans-serif;
         }
@@ -19,34 +18,19 @@
             margin-bottom: 1rem;
         }
     </style>
-    <script>
-        function validateForm() {
-            // Your custom form validation logic
-            return true;
-        }
-
-
-    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
     <h1>Health Prediction</h1>
-    <form id="health-form" action= "{{ url_for('res' , data='a:b' )  }}" >
+    <form id="health-form" action= "{{ url_for('res') }}" >
         <input type="number" name="step_count" placeholder="Step count" required>
         <input type="number" name="calories_burnt" placeholder="Calories burnt" required>
         <input type="number" name="hours_of_sleep" placeholder="Hours of sleep" required>
-        <input type="number" name="Weight" placeholder="Weight" required>
-        <input type="number" name="Height" placeholder="Height" required>
+        <input type="number" name="Weight" placeholder="Weight (in kg)" required>
+        <input type="number" name="Height" placeholder="Height (in cm)" required>
         <input type="number" name="calories" placeholder="Calories" required>
-        <input type="number" name="BMI" placeholder="BMI" required>
-        <input type="number" name="Calorie_Deficient_or_Over" placeholder="Calorie Deficient or Over" required>
         <button type="submit">Submit</button>
 
     </form>
-    {% if result %}
-    <div>
-        <h2>Result</h2>
-        <p>{{ result }}</p>
-    </div>
-    {% endif %}
 </body>
 </html>
