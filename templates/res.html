@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Prediction Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='res.css') }}">
+  </head>
+  <body>
+    <h1>Prediction Results</h1>
+    <div id="result-container">
+      {{ results }}
+    </div>
+    <button onclick="location.href='/'">Go Back</button>
+  </body>
+</html>
