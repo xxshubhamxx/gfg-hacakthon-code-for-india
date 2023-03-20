@@ -20,6 +20,4 @@ grpcio-status==1.51.3
 gunicorn==20.1.0
 Flask==2.2.2
 Flask-Admin==1.5.8
-Flask-Babel==2.0.0
-Flask-BabelEx==0.9.4
-Flask-Bcrypt==0.7.1
+python-dotenv==0.19.1
