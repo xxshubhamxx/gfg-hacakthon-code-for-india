@@ -8,7 +8,12 @@
   <body>
     <h1>Prediction Results</h1>
     <div id="result-container">
-      {{ results }}
+      {% if results %}
+        <p>Predicted Class: {{ results.class }}</p>
+        <p>Score: {{ results.score }}</p>
+      {% else %}
+        <p>There was an error with your request. Please try again.</p>
+      {% endif %}
     </div>
     <button onclick="location.href='/'">Go Back</button>
   </body>

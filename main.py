@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 import json
-
-app = Flask(__name__)
+import os
+from dotenv import load_dotenv
 
 from typing import Dict
 
@@ -10,13 +10,10 @@ from google.protobuf import json_format
 from google.protobuf.struct_pb2 import Value
 
 
-def predict_tabular_classification_sample(
-    project: str,
-    endpoint_id: str,
-    instance_dict: Dict,
-    location: str = "us-central1",
-    api_endpoint: str = "us-central1-aiplatform.googleapis.com",
-):
+app = Flask(__name__)
+load_dotenv()
+
+def predict_tabular_classification_sample(project: str, endpoint_id: str, instance_dict: Dict, location: str , api_endpoint: str):
     client_options = {"api_endpoint": api_endpoint}
     client = aiplatform.gapic.PredictionServiceClient(client_options=client_options)
     instance = json_format.ParseDict(instance_dict, Value())
@@ -40,24 +37,31 @@ def index():
 
 def getres(data):
     result = predict_tabular_classification_sample(
-            project="570852395329",
-            endpoint_id="7833884008462155776",
-            location="us-central1",
-            instance_dict=data
+            project = os.environ.get('PROJECT_ID'),
+            endpoint_id = os.environ.get('ENDPOINT_ID'),
+            location=os.environ.get('LOCATION'),
+            api_endpoint = os.environ.get('API_ENDPOINT'),
+            instance_dict = data
         )
+    print(dict(result))
     sc = result['scores']
+    r = {}
     if sc[0] > sc[1]:
-        result = 'Unhealthy'
+        r['class'] = 'Unhealthy'
+        r['score'] = result['scores'][0]
     else:
-        result = 'Healthy' 
-    return result
+        r['class'] = 'Healthy'
+        r['score'] = result['scores'][1]
+    return r
 
 @app.route('/res')
 def res():
     
     data = request.args.to_dict()
     print(data)
-    data['BMI'] = str((int(data['Weight']) * 10000 / (int(data['Height']) * int(data['Height']))))
+    w = int(data['Weight'])
+    h = int(data['Height'])
+    data['BMI'] = str(w / (h * h / 10000))
     data['Calorie_Deficient_or_Over'] = str(int(data['calories']) - int(data['calories_burnt']) - 2000)
     return render_template('res.html', results=getres(data))
 
