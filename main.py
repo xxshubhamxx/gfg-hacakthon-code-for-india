@@ -1,33 +1,9 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 import json
+import requests
 import os
-from dotenv import load_dotenv
-
-from typing import Dict
-
-from google.cloud import aiplatform
-from google.protobuf import json_format
-from google.protobuf.struct_pb2 import Value
-
 
 app = Flask(__name__)
-load_dotenv()
-
-def predict_tabular_classification_sample(project: str, endpoint_id: str, instance_dict: Dict, location: str , api_endpoint: str):
-    client_options = {"api_endpoint": api_endpoint}
-    client = aiplatform.gapic.PredictionServiceClient(client_options=client_options)
-    instance = json_format.ParseDict(instance_dict, Value())
-    instances = [instance]
-    parameters_dict = {}
-    parameters = json_format.ParseDict(parameters_dict, Value())
-    endpoint = client.endpoint_path(
-        project=project, location=location, endpoint=endpoint_id
-    )
-    response = client.predict(
-        endpoint=endpoint, instances=instances, parameters=parameters
-    )
-    predictions = response.predictions
-    return dict(predictions[0])
 
 results = ""
 
@@ -35,15 +11,28 @@ results = ""
 def index():
     return render_template('index.html', getres = getres)
 
-def getres(data):
-    result = predict_tabular_classification_sample(
-            project = os.environ.get('PROJECT_ID'),
-            endpoint_id = os.environ.get('ENDPOINT_ID'),
-            location=os.environ.get('LOCATION'),
-            api_endpoint = os.environ.get('API_ENDPOINT'),
-            instance_dict = data
-        )
-    print(dict(result))
+def getres(data1):
+    print(data1)
+    data = {
+        "instances": [
+            {
+                "step_count": data1['step_count'],
+                "calories_burnt": data1['calories_burnt'],
+                "hours_of_sleep": data1['hours_of_sleep'],
+                "Weight": data1['Weight'],
+                "Height": data1['Height'],
+                "calories": data1['calories'],
+                "BMI": data1['BMI']
+            }
+        ]
+    }
+
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    response = requests.post('https://gcp-model-service-emffglsbhq-uc.a.run.app/predict', data=json.dumps(data), headers=headers)
+    prediction = response.json()
+    tempresult = jsonify(prediction)
+    result = tempresult.get_json()['predictions'][0]
+    print(result)
     sc = result['scores']
     r = {}
     if sc[0] > sc[1]:
@@ -57,7 +46,7 @@ def getres(data):
 @app.route('/res')
 def res():    
     data = request.args.to_dict()
-    print(data)
+    # print(data)
     w = float(data['Weight'])
     h = float(data['Height'])
     data['BMI'] = str(w / (h * h / 10000))
