@@ -6,15 +6,22 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/res.css') }}">
   </head>
   <body>
-    <h1>Prediction Results</h1>
-    <div id="result-container">
-      {% if results %}
-        <p>Predicted Class: {{ results.class }}</p>
-        <p>Score: {{ results.score }}</p>
-      {% else %}
-        <p>There was an error with your request. Please try again.</p>
-      {% endif %}
+    <div class="container">
+      <h1>Prediction Results</h1>
+      <div id="result-container" class="result">
+        {% if results %}
+          <p class="success">Predicted Class: {{ results.class }}</p>
+          <p class="success">Score: {{ results.score }}</p>
+        {% else %}
+          <p class="error">There was an error with your request. Please try again.</p>
+        {% endif %}
+      </div>
+      <div class="plan-container">
+        <h2>Plan</h2>
+        <p>{{plan | safe}}</p>
+      </div>
+      <br>
+      <button class="btn" onclick="location.href='/'">Go Back</button>
     </div>
-    <button onclick="location.href='/'">Go Back</button>
   </body>
 </html>
