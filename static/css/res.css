@@ -36,6 +36,14 @@ h2 {
   border-radius: 5px;
 }
 
+.openai-info-container {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+}
+
 .error {
   color: red;
   font-weight: bold;

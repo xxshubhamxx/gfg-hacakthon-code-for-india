@@ -53,7 +53,8 @@ def res():
     data['BMI'] = str(w / (h * h / 10000))
     data['Calorie_Deficient_or_Over'] = str(float(data['calories']) - float(data['calories_burnt']) - 2000)
     pred = getres(data)
-    return render_template('res.html', results=pred, plan=FitnessGenie.ai_response(json.dumps(data), str(pred)))
+    fitness_plan = FitnessGenie.ai_response(json.dumps(data), str(pred))
+    return render_template('res.html', results=pred, plan=fitness_plan, billing_info=FitnessGenie.billing_resp())
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)

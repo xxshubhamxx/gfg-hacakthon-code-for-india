@@ -18,7 +18,11 @@
       </div>
       <div class="plan-container">
         <h2>Plan</h2>
-        <p>{{plan | safe}}</p>
+        <p>{{ plan | safe }}</p>
+      </div>
+      <div class="openai-info-container">
+        <h2>OpenAI Information</h2>
+        <p>{{ billing_info | safe }}</p>
       </div>
       <br>
       <button class="btn" onclick="location.href='/'">Go Back</button>
