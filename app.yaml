@@ -5,3 +5,6 @@ automatic_scaling:
 env_variables:
   REGION: asia-south1
   GAE_INSTANCE_CLASS: F1
+network:
+  forwarded_ports:
+    - 5673

@@ -10,8 +10,11 @@
       <h1>Prediction Results</h1>
       <div id="result-container" class="result">
         {% if results %}
-          <p class="success">Predicted Class: {{ results.class }}</p>
-          <p class="success">Score: {{ results.score }}</p>
+          <p class="success">Predicted Class: {{ results[0] }}</p>
+
+          <!-- <p class="success">Predicted Class: {{ results.class }}</p>
+          <p class="success">Score: {{ results.score }}</p> -->
+
         {% else %}
           <p class="error">There was an error with your request. Please try again.</p>
         {% endif %}
@@ -20,10 +23,10 @@
         <h2>Plan</h2>
         <p>{{ plan | safe }}</p>
       </div>
-      <div class="openai-info-container">
+      <!-- <div class="openai-info-container">
         <h2>OpenAI Information</h2>
         <p>{{ billing_info | safe }}</p>
-      </div>
+      </div> -->
       <br>
       <button class="btn" onclick="location.href='/'">Go Back</button>
     </div>
