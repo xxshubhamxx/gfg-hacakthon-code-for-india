@@ -1,8 +1,21 @@
-FROM python:3.10-alpine
-COPY . /app
+FROM ubuntu:latest
+
+# Update and install dependencies
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set the working directory
 WORKDIR /app
-RUN apk add --no-cache gcc musl-dev && \
-    pip install --no-cache-dir -r requirements.txt && \
-    apk del gcc musl-dev
+
+# Copy the application files
+COPY . /app
+
+# Install the dependencies
+RUN pip3 install -r requirements.txt
+
+# Expose the port
 EXPOSE 5673
-CMD [ "python", "main.py" ]
+
+# Start the application with Gunicorn
+CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:8080"]

@@ -58,4 +58,4 @@ def res():
     return render_template('res.html', results=pred, plan=fitness_plan, billing_info=FitnessGenie.billing_resp())
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5673, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)    
