@@ -28,4 +28,4 @@ If you find any bugs or have any suggestions for improving the system, please fe
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
