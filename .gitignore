@@ -1,7 +1,7 @@
 __pycache__/
 .git
 .DS_Store
-*.env
+openai_files/.env
 .vscode
 venv/
 .gcloudignore
