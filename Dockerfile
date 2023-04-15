@@ -15,7 +15,7 @@ COPY . /app
 RUN pip3 install -r requirements.txt
 
 # Expose the port
-EXPOSE 5673
+EXPOSE 8080
 
 # Start the application with Gunicorn
 CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:8080"]
