@@ -7,4 +7,4 @@ env_variables:
   GAE_INSTANCE_CLASS: F1
 network:
   forwarded_ports:
-    - 5673
+    - 8080

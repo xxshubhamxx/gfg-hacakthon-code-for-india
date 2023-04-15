@@ -13,38 +13,6 @@ results = ""
 def index():
     return render_template('index.html')
 
-# def getres(data1):
-#     print("Input data:",data1)
-#     data = {
-#         "instances": [
-#             {
-#                 "step_count": data1['step_count'],
-#                 "calories_burnt": data1['calories_burnt'],
-#                 "hours_of_sleep": data1['hours_of_sleep'],
-#                 "Weight": data1['Weight'],
-#                 "Height": data1['Height'],
-#                 "calories": data1['calories'],
-#                 "BMI": data1['BMI']
-#             }
-#         ]
-#     }
-
-#     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-#     response = requests.post('https://gcp-model-service-emffglsbhq-uc.a.run.app/predict', data=json.dumps(data), headers=headers)
-#     prediction = response.json()
-#     tempresult = jsonify(prediction)
-#     result = tempresult.get_json()['predictions'][0]
-#     print("AutoML Model Output: ",result)
-#     sc = result['scores']
-#     r = {}
-#     if sc[0] > sc[1]:
-#         r['class'] = 'Unhealthy'
-#         r['score'] = result['scores'][0]
-#     else:
-#         r['class'] = 'Healthy'
-#         r['score'] = result['scores'][1]
-#     return r
-
 @app.route('/res')
 def res():    
     data = request.args.to_dict()
@@ -58,4 +26,4 @@ def res():
     return render_template('res.html', results=pred, plan=fitness_plan, billing_info=FitnessGenie.billing_resp())
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)    
+    app.run(host='0.0.0.0', port=8080, debug=True)

@@ -11,7 +11,6 @@ def predict(data):
     pickle_in = open(f"{os.path.join(os.getcwd(),'ml_model','classifier.pkl')}","rb")
     classifier = pickle.load(pickle_in)
   
-    # 	step_count,	calories_burnt,	hours_of_sleep,	Weight,	Height,	calories,	BMI
     step_count = data['step_count']
     calories_burnt = data['calories_burnt']
     hours_of_sleep = data['hours_of_sleep']
