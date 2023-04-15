@@ -6,7 +6,7 @@ from datetime import datetime
 import base64
 
 load_dotenv()
-openai.api_key = base64.b64decode(os.getenv('OPENAI_KEY'))
+openai.api_key = base64.b64decode(os.getenv('OPENAI_KEY')).decode("utf-8")
 
 def ai_response(data, pred):
     prompt = "Suggest a workout plan for me. My health details are: " + data + " Please note that height is in cm and weight is present in kg. I also created a machine learning model trained using Google's AutoML to predict whether I am healthy or not. Here are the results: " + pred + " Don't rely on model's output as it has only about 90% accuracy. Suggest a detailed workout plan for me in about 200 words in list format."
