@@ -1,6 +1,6 @@
 # Fitness Genie:
 
-This workout plan recommendation system is designed to recommend exercises to people based on their details. The system takes in the user'sphysical details as input and calculates their fitness level. Based on these metrics, the system recommends a workout plan that are suitable for their body type and fitness level.
+This workout plan recommendation system is designed to recommend exercises to people based on their details. The system takes in the user's physical details as input and calculates their fitness level. Based on these metrics, the system recommends a workout plan that are suitable for their body type and fitness level.
 
 ## Getting Started
 
