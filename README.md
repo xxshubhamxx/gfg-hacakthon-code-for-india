@@ -1,3 +1,5 @@
+NOTE: This repository contains only a small part of the entire application. The repository contianing the entire application's code with more advanced features is not open source yet.
+
 # Fitness Genie:
 
 This workout plan recommendation system is designed to recommend exercises to people based on their details. The system takes in the user's physical details as input and calculates their fitness level. Based on these metrics, the system recommends a workout plan that are suitable for their body type and fitness level.
